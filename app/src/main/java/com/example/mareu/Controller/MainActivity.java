@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
     private static List<Meeting> mSortedList;
     private CreatedMeetingFragment mCreatedMeetingFragment;
+    private NewMeetingFragment mNewMeetingFragment;
     private Button mDismissButton;
+    private FloatingActionButton fab;
 
 
     /**
@@ -78,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
+        if (findViewById(R.id.fragment_main_add_meeting_land)!=null)
+            fab.hide();
         //Init meeting list
         //configure floating action button
         fab.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         });
         configureDismissButton();
         configureFragment();
+        configureNewMeetingFragment();
     }
 
     @Override
@@ -128,6 +133,18 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_main, mCreatedMeetingFragment)
                 .commit();
+
+
+    }
+
+    public void configureNewMeetingFragment(){
+        if (findViewById(R.id.fragment_main_add_meeting_land)!=null){
+
+            mNewMeetingFragment = new NewMeetingFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_main_add_meeting_land,mNewMeetingFragment)
+                    .commit();
+        }
     }
 
     /**
@@ -175,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe
     public void onFilterEvent(FilterEvent event){
         configureDismissButton();
+        configureNewMeetingFragment();
     }
 
 }

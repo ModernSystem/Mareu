@@ -28,6 +28,9 @@ import android.widget.Toast;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.Model.User;
 import com.example.mareu.R;
+import com.example.mareu.Utils.FilterEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -60,24 +63,22 @@ public class NewMeetingFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_new_meeting, container, false);
 
-        if (savedInstanceState!=null) {
-            mMeeting = (Meeting) savedInstanceState.getSerializable(STATE_MEETING);
-            if (mMeeting.getSchedule()!=null)
-                myCalendar.setTime(mMeeting.getSchedule());
-        }
-
-
         //1 Method to get meeting subject
-        configureSubjectEditText();
+        mSubject=v.findViewById(R.id.new_meeting_subject);
         //1.1 Method to get meeting date
+        mDate= v.findViewById(R.id.new_meeting_date);
         configureDateEditText();
         //Method to get meeting time
+        mTime=v.findViewById(R.id.new_meeting_time);
         configureTimeEditText();
         //Method to configure spinner
+        mPlace=v.findViewById(R.id.new_meeting_place_spinner);
         configurePlaceSpinner();
         //Method to get meeting participants
+        mParticipant = v.findViewById(R.id.autocomplete_participant);
         configureMultiAutoCompleteTextView();
         //Configure Button
+        mAddNewMeetingButton=v.findViewById(R.id.new_meeting_button);
         addMeetingButton();
 
         return v;
@@ -86,10 +87,7 @@ public class NewMeetingFragment extends Fragment {
     /**
      * Configure meeting Subject
      */
-    private void configureSubjectEditText(){
-        mSubject=findViewById(R.id.new_meeting_subject);
 
-    }
     private void setMeetingSubject(){
         Log.d(TAG, "setMeetingSubject: "+mSubject.getText());
         if (mSubject.getText()!=null)
@@ -100,7 +98,7 @@ public class NewMeetingFragment extends Fragment {
      * configure DatePicker & show in EditText
      */
     private void configureDateEditText(){
-        mDate= findViewById(R.id.new_meeting_date);
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -118,12 +116,12 @@ public class NewMeetingFragment extends Fragment {
 
 
         };
-        mDate.setOnClickListener(new View.OnClickListener() {
 
+        mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(NewMeetingActivity.this, date, myCalendar
+                new DatePickerDialog(getContext(), date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH))
                         .show();
@@ -142,7 +140,6 @@ public class NewMeetingFragment extends Fragment {
 
         //if time is not filled, we set MILLISECOND=15, if filled, MILLISECOND=0
         myCalendar.set(Calendar.MILLISECOND,15);
-        mTime=findViewById(R.id.new_meeting_time);
         mTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,7 +148,7 @@ public class NewMeetingFragment extends Fragment {
         });
     }
     private void showTimerPicker(){
-        TimePickerDialog tpd=new TimePickerDialog(NewMeetingActivity.this, new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog tpd=new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 mTime.setText(String.format("%02d:%02d", hourOfDay, minute));
@@ -168,7 +165,7 @@ public class NewMeetingFragment extends Fragment {
      * configure spinner
      */
     private void configurePlaceSpinner(){
-        mPlace=findViewById(R.id.new_meeting_place_spinner);
+
         mPlace.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -187,8 +184,8 @@ public class NewMeetingFragment extends Fragment {
      */
     private void configureMultiAutoCompleteTextView() {
 
-        mParticipant = findViewById(R.id.autocomplete_participant);
-        final ArrayAdapter<User> adapter=new ArrayAdapter<User>(this,
+
+        final ArrayAdapter<User> adapter=new ArrayAdapter<User>(getActivity(),
                 R.layout.item_layout,
                 User.generateUserList()){
             @NonNull
@@ -250,7 +247,7 @@ public class NewMeetingFragment extends Fragment {
      * Configure addMeeting button
      */
     private void addMeetingButton(){
-        mAddNewMeetingButton=findViewById(R.id.new_meeting_button);
+
 
         mAddNewMeetingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -267,23 +264,29 @@ public class NewMeetingFragment extends Fragment {
                         && myCalendar.get(Calendar.MILLISECOND)!=15){
                     // 2.0 if yes and meeting room not taken, finish add meeting to the list and finish activity
                     MainActivity.addMeeting(mMeeting);
-                    finish();
+
+
+                    if (getActivity().findViewById(R.id.fragment_main_add_meeting_land)==null)
+                        getActivity().finish();
+                    else
+                        EventBus.getDefault().post(new FilterEvent());
+
                 }
                 // if not, we search why we can't add meeting
                 else {
                     if ( checkForExistingMeeting()){
                         // 2.1 if room already taken, toast to show it to the user
-                        Toast.makeText(NewMeetingActivity.this,R.string.room_already_taken, Toast.LENGTH_SHORT)
+                        Toast.makeText(getContext(),R.string.room_already_taken, Toast.LENGTH_SHORT)
                                 .show();
                     }
                     else if (mMeeting.getSubject().length()==1){
                         // 2.2 if meeting subject is too short
-                        Toast.makeText(NewMeetingActivity.this,R.string.meeting_sugject_wrong, Toast.LENGTH_SHORT)
+                        Toast.makeText(getContext(),R.string.meeting_sugject_wrong, Toast.LENGTH_SHORT)
                                 .show();
                     }
                     else {
                         // 2.2 if a field is empty, toast to show it to the user
-                        Toast.makeText(NewMeetingActivity.this, R.string.Error, Toast.LENGTH_SHORT)
+                        Toast.makeText(getContext(), R.string.Error, Toast.LENGTH_SHORT)
                                 .show();
                     }
                 }
@@ -322,13 +325,6 @@ public class NewMeetingFragment extends Fragment {
             }
         }
         return mCheckDate;
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        setMeetingSubject();
-        outState.putSerializable(STATE_MEETING,mMeeting);
-        super.onSaveInstanceState(outState);
     }
 
 }
