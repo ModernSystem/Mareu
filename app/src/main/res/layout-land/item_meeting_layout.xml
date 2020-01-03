@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/left_ImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/colorPrimary"
+        android:layout_margin="15dp"
+        app:layout_constraintCircleRadius="50dp" />
+
+    <TextView
+        android:id="@+id/fragment_meeting_TextView_Top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_blank_fragment"
+        android:layout_marginStart="15dp"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/left_ImageView"
+        app:layout_constraintTop_toTopOf="@id/left_ImageView" />
+
+    <TextView
+        android:id="@+id/fragment_meeting_TextView_Bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="@string/hello_blank_fragment"
+        android:textColor="@color/black"
+        android:textSize="@dimen/participant_text_size"
+        android:layout_marginStart="15dp"
+        app:layout_constraintLeft_toRightOf="@id/left_ImageView"
+        app:layout_constraintTop_toBottomOf="@id/fragment_meeting_TextView_Top" />
+
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:src="@drawable/ic_delete_24px"
+        app:layout_constraintBottom_toBottomOf="@id/left_ImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/left_ImageView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
