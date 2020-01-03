@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.mareu.Controller.MainActivity">
+
+    <item
+        android:id="@+id/filter_by_room"
+        android:orderInCategory="100"
+        android:title="@string/select_room"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/filter_by_date"
+        android:title="@string/select_date"/>
+
+
+</menu>

@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Mareu</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="meeting_subject">Meeting subject :</string>
+    <string name="meeting_place">Place :</string>
+    <string name="meeting_date">Date :</string>
+    <string name="meeting_time">Time :</string>
+    <string name="title_activity_new_meeting">NewMeetingActivity</string>
+    <string name="new_meeting">Create new meeting</string>
+    <string name="choose_room">Choose a room</string>
+    <string name="participant">Participants :</string>
+    <string name="create_new_meeting">Create new meeting</string>
+    <string name="Error">All fields are not filled</string>
+    <string name="room_already_taken">This room is already taken at this moment</string>
+    <string name="meeting_sugject_wrong">Meeting suject must be more than 1 letter</string>
+    <string name="already_selected">This participant has already been added</string>
+    <string name="filter_dialog_title_date">Select dates</string>
+    <string name="filter_dialog_title_room">Select dates</string>
+    <string name="dismiss_filter">Dismiss filters</string>
+    <string name="select_date">Select dates</string>
+    <string name="select_room">Select rooms</string>
+
+
+    <string-array name="Meeting_Room">
+        <item>Room A</item>
+        <item>Room B</item>
+        <item>Room C</item>
+        <item>Room D</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Controller.NewMeetingActivity"
+    tools:showIn="@layout/activity_new_meeting">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:id="@+id/new_meeting_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/meeting_subject"
+            android:textSize="@dimen/text_size"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/layout_subject"
+        app:layout_constraintRight_toLeftOf="@id/layout_time"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <EditText
+            android:id="@+id/new_meeting_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="@string/meeting_date"
+            android:inputType="date"
+            android:padding="10dp"
+            android:textSize="@dimen/text_size" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/layout_subject"
+        app:layout_constraintLeft_toRightOf="@id/layout_date"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:id="@+id/new_meeting_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/meeting_time"
+            android:textSize="@dimen/text_size"
+            android:inputType="time"
+            android:clickable="true"
+            android:focusable="false"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <LinearLayout
+        android:id="@+id/new_meeting_place"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        app:layout_constraintLeft_toRightOf="@+id/ExpandableListView_layout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_time"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp">
+
+        <Spinner
+            android:id="@+id/new_meeting_place_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:inputType="text"
+            android:text="@string/meeting_place"
+            android:textSize="@dimen/text_size"
+            android:dropDownSelector="@color/colorPrimary"
+            android:entries="@array/Meeting_Room"
+            />
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ExpandableListView_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/new_meeting_place"
+        app:layout_constraintTop_toTopOf="@id/new_meeting_place"
+        >
+
+
+        <androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView
+
+            android:id="@+id/autocomplete_participant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:hint="@string/participant"
+            android:clickable="true"
+            android:focusable="false"
+            android:completionThreshold="0"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/new_meeting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_new_meeting"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:background="@color/colorAccent"
+        android:elevation="5dp"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/filter_room_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/filter_dialog_title_room"
+        android:layout_margin="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"/>
+
+    <View
+
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/filter_room_title"/>
+
+    <CheckBox
+        android:id="@+id/filter_room_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="10dp"
+        android:text="Room A"/>
+
+    <CheckBox
+        android:id="@+id/filter_room_B"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/filter_room_A"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="10dp"
+        android:text="Room B"/>
+
+    <CheckBox
+        android:id="@+id/filter_room_C"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/filter_room_B"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="10dp"
+        android:text="Room C"/>
+
+    <TextView
+        android:id="@+id/textbutton_ok_filter_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/filter_room_C"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="20dp"
+        android:text="Ok"
+        android:clickable="true"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size"/>
+
+    <TextView
+        android:id="@+id/textbutton_cancel_filter_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/textbutton_ok_filter_room"
+        app:layout_constraintBottom_toBottomOf="@id/textbutton_ok_filter_room"
+        app:layout_constraintRight_toLeftOf="@id/textbutton_ok_filter_room"
+        android:layout_marginEnd="100dp"
+        android:text="Cancel"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size"/>
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
