@@ -18,10 +18,11 @@
     <string name="meeting_sugject_wrong">Meeting suject must be more than 1 letter</string>
     <string name="already_selected">This participant has already been added</string>
     <string name="filter_dialog_title_date">Select dates</string>
-    <string name="filter_dialog_title_room">Select dates</string>
+    <string name="filter_dialog_title_room">Select rooms</string>
     <string name="dismiss_filter">Dismiss filters</string>
-    <string name="select_date">Select dates</string>
-    <string name="select_room">Select rooms</string>
+    <string name="filter_by_date">Filter by date</string>
+    <string name="filter_by_room">Filter by room</string>
+
 
 
     <string-array name="Meeting_Room">

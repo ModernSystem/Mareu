@@ -2,6 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:padding="15dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -27,46 +29,29 @@
         app:layout_constraintTop_toBottomOf="@id/filter_date_title"/>
 
 
-    <EditText
-        android:padding="10dp"
-        android:inputType="date"
-        android:id="@+id/from_date"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/from_date_layout"
+        android:layout_marginTop="10dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line1"
-        app:layout_constraintLeft_toLeftOf="@id/to_time"
-        android:hint="@string/meeting_date"
-        android:clickable="true"
-        android:focusable="false"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1">
 
-    <EditText
-        android:padding="10dp"
-        android:inputType="date"
-        android:id="@+id/from_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/texview1"
-        app:layout_constraintTop_toBottomOf="@id/from_date"
-        android:hint="@string/meeting_time"
-        android:clickable="true"
-        android:focusable="false"/>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:id="@+id/from_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="From :"
+            android:inputType="date" />
 
-    <TextView
-        android:id="@+id/texview1"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:padding="10dp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="From :"
-        app:layout_constraintRight_toLeftOf="@id/to_time"
-        app:layout_constraintTop_toTopOf="@id/from_date"
-        app:layout_constraintBottom_toBottomOf="@id/from_time"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <View
 
@@ -75,53 +60,37 @@
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/from_time"/>
+        app:layout_constraintTop_toBottomOf="@id/from_date_layout"/>
 
-    <EditText
-        android:id="@+id/to_date"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/to_date_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/meeting_date"
-        android:inputType="date"
-        android:padding="10dp"
-        app:layout_constraintLeft_toLeftOf="@id/to_time"
+        app:layout_constraintTop_toTopOf="@id/line"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line"
-        android:clickable="true"
-        android:focusable="false"/>
+        app:layout_constraintLeft_toLeftOf="parent">
 
-    <EditText
-        android:padding="10dp"
-        android:inputType="date"
-        android:id="@+id/to_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/to_date"
-        app:layout_constraintLeft_toRightOf="@id/textview2"
-        android:hint="@string/meeting_time"
-        android:clickable="true"
-        android:focusable="false"/>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:id="@+id/to_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="date"
+            android:textSize="@dimen/text_size"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="To :" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textview2"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size"
-        android:padding="10dp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="To :"
-        app:layout_constraintRight_toLeftOf="@id/to_time"
-        app:layout_constraintTop_toTopOf="@id/to_date"
-        app:layout_constraintBottom_toBottomOf="@id/to_time"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-
-    <TextView
-        android:id="@+id/textbutton_ok"
+        android:id="@+id/TextButton_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/to_time"
+        app:layout_constraintTop_toBottomOf="@id/to_date_layout"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="20dp"
         android:text="Ok"
@@ -130,12 +99,12 @@
         android:textSize="@dimen/text_size"/>
 
     <TextView
-        android:id="@+id/textbutton_cancel"
+        android:id="@+id/TextButton_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/textbutton_ok"
-        app:layout_constraintBottom_toBottomOf="@id/textbutton_ok"
-        app:layout_constraintRight_toLeftOf="@id/textbutton_ok"
+        app:layout_constraintTop_toTopOf="@id/TextButton_ok"
+        app:layout_constraintBottom_toBottomOf="@id/TextButton_ok"
+        app:layout_constraintRight_toLeftOf="@id/TextButton_ok"
         android:layout_marginEnd="100dp"
         android:text="Cancel"
         android:textColor="@color/colorAccent"

@@ -16,9 +16,6 @@ import androidx.annotation.NonNull;
 import com.example.mareu.Controller.MainActivity;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.R;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,9 +28,7 @@ public class CustomDateFilterDialogClass extends Dialog {
     final Calendar myCalendarTo = Calendar.getInstance();
 
     private EditText mFromDate;
-    private EditText mFromTime;
     private EditText mToDate;
-    private EditText mToTime;
     private TextView mOk;
     private TextView mCancel;
 
@@ -47,31 +42,14 @@ public class CustomDateFilterDialogClass extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog_date);
         mFromDate=findViewById(R.id.from_date);
-        mFromTime=findViewById(R.id.from_time);
         mToDate=findViewById(R.id.to_date);
-        mToTime=findViewById(R.id.to_time);
-        mOk=findViewById(R.id.textbutton_ok);
-        mCancel=findViewById(R.id.textbutton_cancel);
+        mOk=findViewById(R.id.TextButton_ok);
+        mCancel=findViewById(R.id.TextButton_cancel);
 
-        //configure the pickers to get From informations
-
+        //configure the pickers to get From information
         configureDateFromEditText();
-        mFromTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTimerPicker();
-            }
-        });
-
-        //configure the pickers to get To informations
-
+        //configure the pickers to get To information
         configureDateToEditText();
-        mToTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTimeToPicker();
-            }
-        });
 
         // Ok and Cancel Button configuration
 
@@ -81,8 +59,7 @@ public class CustomDateFilterDialogClass extends Dialog {
                 if (myCalendarTo.getTime().compareTo(myCalendarFrom.getTime())<1)
                     Toast.makeText(getContext(),"2nd date must be after 1st date", Toast.LENGTH_LONG).show();
                 else{
-                    sortListByDates();
-                    EventBus.getDefault().post(new FilterEvent());
+                    sortListByDates(myCalendarFrom,myCalendarTo);
                     dismiss();
                 }
             }
@@ -137,7 +114,7 @@ public class CustomDateFilterDialogClass extends Dialog {
     }
 
     private void updateDateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "dd/MM/yy hh:mm"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRENCH);
         mFromDate.setText(sdf.format(myCalendarFrom.getTime()));
     }
@@ -147,7 +124,7 @@ public class CustomDateFilterDialogClass extends Dialog {
         TimePickerDialog tpd=new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                mFromTime.setText(String.format("%02d:%02d", hourOfDay, minute));
+
                 myCalendarFrom.set(Calendar.HOUR_OF_DAY,hourOfDay);
                 myCalendarFrom.set(Calendar.MINUTE,minute);
                 myCalendarFrom.set(Calendar.SECOND,0);
@@ -196,7 +173,7 @@ public class CustomDateFilterDialogClass extends Dialog {
     }
 
     private void updateDateToLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "dd/MM/yy mm:hh"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRENCH);
         mToDate.setText(sdf.format(myCalendarTo.getTime()));
     }
@@ -206,7 +183,6 @@ public class CustomDateFilterDialogClass extends Dialog {
         TimePickerDialog tpdg=new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                mToTime.setText(String.format("%02d:%02d", hourOfDay, minute));
                 myCalendarTo.set(Calendar.HOUR_OF_DAY,hourOfDay);
                 myCalendarTo.set(Calendar.MINUTE,minute);
                 myCalendarTo.set(Calendar.SECOND,0);
@@ -221,11 +197,12 @@ public class CustomDateFilterDialogClass extends Dialog {
      * Sort meeting list with date argument
      */
 
-    private void sortListByDates(){
+    public void sortListByDates(Calendar calendarFrom, Calendar calendarTo){
         List<Meeting> sortedList=new ArrayList<>();
+
         for (Meeting meeting: MainActivity.getMeetingList()) {
-            if (meeting.getSchedule().compareTo(myCalendarFrom.getTime()) > 0
-                    && meeting.getSchedule().compareTo(myCalendarTo.getTime()) < 0)
+            if (meeting.getSchedule().compareTo(calendarFrom.getTime()) > 0
+                    && meeting.getSchedule().compareTo(calendarTo.getTime()) < 0)
                 sortedList.add(meeting);
         }
         MainActivity.setSortedMeetingList(sortedList);
@@ -233,6 +210,7 @@ public class CustomDateFilterDialogClass extends Dialog {
             Toast.makeText(getContext(), "No meeting at those dates", Toast.LENGTH_SHORT).show();
             MainActivity.setSortedMeetingList(null);
         }
+        
 
     }
 

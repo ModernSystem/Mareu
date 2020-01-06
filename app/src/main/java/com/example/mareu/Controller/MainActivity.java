@@ -117,9 +117,10 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.filter_by_date) {
             configureDateFilter();
         }
-        if (id==R.id.filter_by_room){
+        if (id == R.id.filter_by_room) {
             configureRoomFilter();
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -133,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_main, mCreatedMeetingFragment)
                 .commit();
-
 
     }
 
@@ -152,11 +152,13 @@ public class MainActivity extends AppCompatActivity {
      */
 
     private void configureDateFilter(){
+        MainActivity.setSortedMeetingList(null);
         CustomDateFilterDialogClass cd = new CustomDateFilterDialogClass(context);
         cd.show();
     }
 
     private void configureRoomFilter(){
+        MainActivity.setSortedMeetingList(null);
         CustomRoomFilterDialogBox cd = new CustomRoomFilterDialogBox(context);
         cd.show();
     }

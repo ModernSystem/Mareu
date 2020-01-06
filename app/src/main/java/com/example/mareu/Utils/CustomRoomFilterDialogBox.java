@@ -83,9 +83,9 @@ public class CustomRoomFilterDialogBox extends Dialog {
             @Override
             public void onClick(View v) {
                 if (mSelectedRoom.size()==0)
-                    Toast.makeText(getContext(),"Please select rooms", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Please select at least 1 room", Toast.LENGTH_LONG).show();
                 else{
-                    sortListByRooms();
+                    sortListByRooms(mSelectedRoom);
                     EventBus.getDefault().post(new FilterEvent());
                     dismiss();
                 }
@@ -101,15 +101,23 @@ public class CustomRoomFilterDialogBox extends Dialog {
 
     }
 
-    private void sortListByRooms(){
+    public void sortListByRooms(ArrayList<String> selectedRoom){
         List<Meeting> sortedList=new ArrayList<>();
+
         for (Meeting meeting: MainActivity.getMeetingList()) {
-            if (mSelectedRoom.contains(meeting.getPlace()))
+            if (selectedRoom.contains(meeting.getPlace()))
                 sortedList.add(meeting);
         }
         MainActivity.setSortedMeetingList(sortedList);
         if (sortedList.size()==0) {
-            Toast.makeText(getContext(), "No meeting at those dates", Toast.LENGTH_SHORT).show();
+
+            String str;
+            if (selectedRoom.size()==1)
+                str="this room";
+            else
+                str="those rooms";
+
+            Toast.makeText(getContext(), "No meeting planned in "+str, Toast.LENGTH_SHORT).show();
             MainActivity.setSortedMeetingList(null);
         }
     }
