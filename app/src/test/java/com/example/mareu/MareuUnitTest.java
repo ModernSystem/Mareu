@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
  * 1 - Meeting add test
  */
 
-public class ExampleUnitTest {
+public class MareuUnitTest {
 
     @Test
     public void adding_meeting_test() {
