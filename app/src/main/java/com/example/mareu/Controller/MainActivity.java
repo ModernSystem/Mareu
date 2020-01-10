@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
             return mMeetingList;
     }
 
+    public static void setMeetingList(List<Meeting> meetingList){
+        mMeetingList=meetingList;
+    }
+
     public static void setSortedMeetingList(List<Meeting> list){
         mSortedList=list;
     }

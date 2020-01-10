@@ -272,6 +272,7 @@ public class NewMeetingFragment extends Fragment {
                         && myCalendar.get(Calendar.MILLISECOND)!=15){
                     // 2.0 if yes and meeting room not taken, finish add meeting to the list and finish activity
                     MainActivity.addMeeting(mMeeting);
+                    Log.d(TAG, "onClick: "+mMeeting);
 
 
                     if (getActivity().findViewById(R.id.fragment_main_add_meeting_land)==null)
