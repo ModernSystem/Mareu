@@ -12,10 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+
 import com.example.mareu.Controller.MainActivity;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.R;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -60,6 +65,7 @@ public class CustomDateFilterDialogClass extends Dialog {
                     Toast.makeText(getContext(),"2nd date must be after 1st date", Toast.LENGTH_LONG).show();
                 else{
                     sortListByDates(myCalendarFrom,myCalendarTo);
+                    EventBus.getDefault().post(new FilterEvent());
                     dismiss();
                 }
             }

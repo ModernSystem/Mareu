@@ -7,7 +7,6 @@ import com.example.mareu.Utils.CustomDateFilterDialogClass;
 import com.example.mareu.Utils.CustomRoomFilterDialogBox;
 
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +15,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.mock;
 
 /**
  * 1 - Meeting add test
@@ -28,8 +31,10 @@ public class MareuUnitTest {
     public void adding_meeting_test() {
 
         assertEquals(MainActivity.getMeetingList().size(),0);
+
         Meeting meeting_to_add=new Meeting();
         MainActivity.addMeeting(meeting_to_add);
+
         assertEquals(MainActivity.getMeetingList().size(),1);
         assertTrue(MainActivity.getMeetingList().contains(meeting_to_add));
 
