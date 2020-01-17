@@ -6,6 +6,7 @@ import com.example.mareu.Model.User;
 import com.example.mareu.Utils.CustomDateFilterDialogClass;
 import com.example.mareu.Utils.CustomRoomFilterDialogBox;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -21,14 +22,20 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.mock;
 
-/**
- * 1 - Meeting add test
- */
+
 
 public class MareuUnitTest {
 
+    @Before
+    public void setUp() throws Exception {
+        MainActivity.setMeetingList(new ArrayList<Meeting>());
+        MainActivity.setSortedMeetingList(null);
+    }
+
     @Test
     public void adding_meeting_test() {
+
+
 
         assertEquals(MainActivity.getMeetingList().size(),0);
 
@@ -42,6 +49,7 @@ public class MareuUnitTest {
 
     @Test
     public void removing_meeting_test() {
+
         Meeting meeting_to_remove=new Meeting();
         MainActivity.addMeeting(meeting_to_remove);
         assertEquals(MainActivity.getMeetingList().size(),1);
@@ -53,6 +61,7 @@ public class MareuUnitTest {
 
     @Test
     public void sortByRoom_test() {
+
         Meeting meeting_1=new Meeting(Calendar.getInstance().getTime(),"Room A","Subject",User.generateUserList());
         Meeting meeting_2=new Meeting(Calendar.getInstance().getTime(),"Room B","Subject",User.generateUserList());
         Meeting meeting_3=new Meeting(Calendar.getInstance().getTime(),"Room C","Subject",User.generateUserList());
@@ -74,6 +83,7 @@ public class MareuUnitTest {
 
     @Test
     public void sortByDate_test() throws ParseException {
+
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         String firstDate="20200101";
