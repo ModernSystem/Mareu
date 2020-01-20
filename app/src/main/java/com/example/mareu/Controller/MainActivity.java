@@ -1,23 +1,26 @@
 package com.example.mareu.Controller;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.R;
 import com.example.mareu.Utils.CustomDateFilterDialogClass;
 import com.example.mareu.Utils.CustomRoomFilterDialogBox;
 import com.example.mareu.Utils.FilterEvent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static void removeMeeting(Meeting meeting) {
         mMeetingList.remove(meeting);
+        if (mSortedList!=null && mSortedList.contains(meeting)){
+            mSortedList.remove(meeting);
+        }
     }
 
     public static List<Meeting> getMeetingList() {

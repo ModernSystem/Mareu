@@ -9,13 +9,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.Controller.MainActivity;
 import com.example.mareu.Model.Meeting;
 import com.example.mareu.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                 @Override
                 public void onClick(View v) {
                     MainActivity.removeMeeting(meeting);
-                    notifyDataSetChanged();
+                    EventBus.getDefault().post(new FilterEvent());
                 }
             });
         }
